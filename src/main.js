@@ -1,23 +1,28 @@
-// import { engine } from 'express-handlebars';
+import { engine, create, ExpressHandlebars } from 'express-handlebars';
+import express from 'express';
+import morgan from 'morgan';
 
-const express = require('express');
-const morgan = require('morgan');
 
 const app = express();
 const port = 3000
+
 
 // HTTP Logger
 app.use(morgan('combined'))
 
 // Template Engine
-// app.engine('handlebars', engine());
-// app.set('view engine', 'handlebars');
+app.engine('hbs', engine({
+   extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
+app.set('views', './src/resources/views');
 
+app.get('/news', (req, res) => {
+   return res.render('news')
+});
 
 app.get('/', (req, res) => {
-   return res.send(`
-      <h1>Hello Word</h1>
-   `);
+   return res.render('home')
 });
 
 app.listen(port, () => {
