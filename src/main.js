@@ -1,11 +1,17 @@
-import { engine, create, ExpressHandlebars } from 'express-handlebars';
+import { engine } from 'express-handlebars';
 import express from 'express';
 import morgan from 'morgan';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const app = express();
-const port = 3000
+const port = 3000;
 
+// Set static folder
+app.use(express.static(path.join(__dirname, "public")));
 
 // HTTP Logger
 app.use(morgan('combined'))
@@ -26,5 +32,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example http://localhost:${port}`);
 })
