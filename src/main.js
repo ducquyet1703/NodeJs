@@ -23,13 +23,18 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', './src/resources/views');
 
-app.get('/news', (req, res) => {
-   return res.render('news')
+app.get('/', (req, res) => {
+   res.render('home')
 });
 
-app.get('/', (req, res) => {
-   return res.render('home')
+app.get('/news', (req, res) => {
+   res.render('news')
 });
+
+app.get('/search', (req, res) => {
+   res.render('search')
+});
+
 
 app.listen(port, () => {
   console.log(`Example http://localhost:${port}`);
